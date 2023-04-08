@@ -3,7 +3,7 @@ import vShader from './shaders/vertexShader.glsl'
 import fShader from './shaders/fragmentShader.glsl'
 import aVertex from './shaders/atmosphereVertex.glsl'
 import aFragment from './shaders/atmosphereFragment.glsl'
-
+const hdrimg = new URL('../../public/sol.jpg', import.meta.url)
 export default function starSun() {
 
     const sunG = new SphereGeometry(50, 80, 80)
@@ -12,7 +12,7 @@ export default function starSun() {
         fragmentShader: fShader,
         uniforms: {
             globeTexture: {
-                value: new TextureLoader().load('../../public/sol.jpg')
+                value: new TextureLoader().load(hdrimg)
             }
         }
     })
