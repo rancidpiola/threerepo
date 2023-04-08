@@ -3,6 +3,7 @@ import { RGBELoader } from '../node_modules/three/examples/jsm/loaders/RGBELoade
 import { OrbitControls } from "../node_modules/three/examples/jsm/controls/OrbitControls"
 const hdrimg = new URL('../public/scene2.hdr', import.meta.url)
 import starSun from "./sun/sun";
+const sunIndex = starSun()
 
 export default function SceneIndex() {
 
@@ -32,10 +33,10 @@ export default function SceneIndex() {
         scene.background = texture;
     })
 
-    scene.add(starSun())
+    scene.add(sunIndex)
 
     function animate() {
-    
+        sunIndex.rotateY(0.004)
         renderer.render(scene, camera);
     }
     renderer.setAnimationLoop(animate);
