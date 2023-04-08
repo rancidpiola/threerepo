@@ -18,7 +18,7 @@ export default function starSun() {
     })
     const sun = new Mesh(sunG, sunM)
     const atmosphere = new Mesh(
-        new SphereGeometry(65, 20, 20),
+        new SphereGeometry(62, 20, 20),
         new ShaderMaterial({
             vertexShader: aVertex,
             fragmentShader: aFragment,
