@@ -4,15 +4,15 @@ import { OrbitControls } from "../node_modules/three/examples/jsm/controls/Orbit
 import starSun from "./sun/sun";
 import mercuryPlanet from "./mercuri/mercuri";
 import earthPlanet from "./earth/earth";
-
+const hdrimg = new URL('../public/scene2.hdr', import.meta.url)
+const sunIndex = starSun()
+const mercuriIndex = mercuryPlanet()
+const earthIndex = earthPlanet()
 
 
 
 export default function SceneIndex() {
-    const hdrimg = new URL('../public/scene2.hdr', import.meta.url)
-    const sunIndex = starSun()
-    const mercuriIndex = mercuryPlanet()
-    const earthIndex = earthPlanet()
+   
     const renderer = new WebGLRenderer()
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
