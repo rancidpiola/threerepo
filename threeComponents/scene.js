@@ -4,18 +4,22 @@ import { OrbitControls } from "../node_modules/three/examples/jsm/controls/Orbit
 import starSun from "./sun/sun";
 import mercuryPlanet from "./mercuri/mercuri";
 import earthPlanet from "./earth/earth";
+import saturn from "./saturn/saturn";
+import saturnPlanet from "./saturn/saturn";
 const hdrimg = new URL('../public/scene2.hdr', import.meta.url)
+const saturnIndex = saturnPlanet()
 const sunIndex = starSun()
 const mercuriIndex = mercuryPlanet()
 const earthIndex = earthPlanet()
 
 
 
+
 export default function SceneIndex() {
-   
+
     const renderer = new WebGLRenderer()
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(window.devicePixelRatio, 1)
     renderer.shadowMap.enabled = true
     renderer.gammaOuput = true
     document.body.appendChild(renderer.domElement);
@@ -42,16 +46,21 @@ export default function SceneIndex() {
         scene.background = texture;
     })
 
-    scene.add(sunIndex, mercuriIndex, earthIndex)
+    scene.add(sunIndex, mercuriIndex, earthIndex, saturnIndex)
 
-    function animate() {
-        sunIndex.rotateY(0.009)
+    window.addEventListener('resize', redimensionar);
+    function redimensionar() {
+        camera.aspect = window.innerWidth / window.innerHeight
+        camera.updateProjectionMatrix()
+        renderer.setSize(window.innerWidth, window.innerHeight)
+    }
+
+
+    renderer.setAnimationLoop(() => {
+        sunIndex.rotateY(0.003)
         mercuriIndex.rotateY(0.009)
         earthIndex.rotateY(0.003)
-        
-
-
+        saturnIndex.rotateY(0.004)
         renderer.render(scene, camera);
-    }
-    renderer.setAnimationLoop(animate);
+    });
 }
